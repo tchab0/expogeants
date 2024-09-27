@@ -1,12 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Lecture audio automatique</title>
+     <title>Image Cliquable avec Audio</title>
+    <style>
+        .clickable-image {
+            cursor: pointer;
+        }
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
     <audio controls autoplay>
   <source src="sorci.mp3" type="audio/mpeg">        
   Your browser does not support the audio element.
 </audio>
+    
+    <div style="position: relative; display: inline-block;">
+        <img src="teteClown.png" alt="Image cliquable" class="clickable-image" id="audioTrigger">
+        <span class="play-icon">▶</span>
+    </div>
+    
+    <audio id="audioPlayer" style="display:none;">
+        <source src="sorci.mp3" type="audio/mpeg">
+        Votre navigateur ne supporte pas l'élément audio.
+    </audio>
+
+    <script>
+        const audioTrigger = document.getElementById('audioTrigger');
+        const audioPlayer = document.getElementById('audioPlayer');
+        const playIcon = document.querySelector('.play-icon');
+
+        audioTrigger.addEventListener('click', function() {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+                playIcon.textContent = '⏸';
+            } else {
+                audioPlayer.pause();
+                playIcon.textContent = '▶';
+            }
+        });
 </body>
 </html>
