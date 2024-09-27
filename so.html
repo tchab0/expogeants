@@ -1,1 +1,26 @@
-<audio src="https://homecloud.chabot.xyz/s/fbDBG4oGEXBd7DH" autoplay>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecteur Audio Automatique</title>
+</head>
+<body>
+    <audio id="audioPlayer" src="https://homecloud.chabot.xyz/s/fbDBG4oGEXBd7DH/download/Sorci%C3%A8reF_session.mp3" style="display:none;"></audio>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var audio = document.getElementById('audioPlayer');
+            audio.play().catch(function(error) {
+                console.log("La lecture automatique a échoué :", error);
+                // Créez un bouton de lecture si la lecture automatique échoue
+                var playButton = document.createElement('button');
+                playButton.innerHTML = 'Lancer la lecture';
+                playButton.onclick = function() {
+                    audio.play();
+                };
+                document.body.appendChild(playButton);
+            });
+        });
+    </script>
+</body>
+</html>
