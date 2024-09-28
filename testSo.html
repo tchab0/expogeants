@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- ... (le reste du head reste inchangé) ... -->
+</head>
+<body>
+    <header>
+        <h2>L'Effondrement des Géants <br>---<br> La Géante Sorcière</h2>
+        
+        <img src="so.png" alt="Description de l'image" class="centered-image">
+
+        <div id="audio-player">
+            <audio id="audio1" style="width: 100%; margin-bottom: 10px;">
+                <source src="SorcièreF-session.mp3" type="audio/mpeg">
+                Votre navigateur ne supporte pas l'élément audio.
+            </audio>
+            <div>
+                <button class="play-button" id="play-button1" onclick="playPause(1)">Français</button>
+            </div>
+            <div>
+                <input type="range" id="seek-bar1" value="0">
+            </div>
+            <div>
+                <span id="current-time1">0:00</span> / 
+                <span id="duration1">0:00</span>
+            </div>
+
+            <audio id="audio2" style="width: 100%; margin-bottom: 10px;">
+                <source src="SorcièreA_Session.mp3" type="audio/mpeg">
+                Votre navigateur ne supporte pas l'élément audio.
+            </audio>
+            <div>
+                <button class="play-button" id="play-button2" onclick="playPause(2)">English</button>
+            </div>
+            <div>
+                <input type="range" id="seek-bar2" value="0">
+            </div>
+            <div>
+                <span id="current-time2">0:00</span> / 
+                <span id="duration2">0:00</span>
+            </div>
+            <div>
+                <label for="volume-bar">Volume:</label>
+                <input type="range" id="volume-bar" min="0" max="1" step="0.1" value="1">
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Le contenu principal de votre page ici -->
+    </main>
+
+    <script>
+        const audio1 = document.getElementById('audio1');
+        const audio2 = document.getElementById('audio2');
+        const seekBar1 = document.getElementById('seek-bar1');
+        const seekBar2 = document.getElementById('seek-bar2');
+        const volumeBar = document.getElementById('volume-bar');
+        const currentTime1 = document.getElementById('current-time1');
+        const currentTime2 = document.getElementById('current-time2');
+        const duration1 = document.getElementById('duration1');
+        const duration2 = document.getElementById('duration2');
+
+        function playPause(playerNum) {
+            const audio = playerNum === 1 ? audio1 : audio2;
+            const button = document.getElementById(`play-button${playerNum}`);
+            
+            if (audio.paused) {
+                audio.play();
+                button.textContent = 'Pause';
+            } else {
+                audio.pause();
+                button.textContent = playerNum === 1 ? 'Français' : 'English';
+            }
+        }
+
+        function setupAudioListeners(audio, seekBar, currentTime, duration) {
+            audio.addEventListener('timeupdate', () => {
+                seekBar.value = audio.currentTime;
+                currentTime.textContent = formatTime(audio.currentTime);
+            });
+
+            audio.addEventListener('loadedmetadata', () => {
+                seekBar.max = audio.duration;
+                duration.textContent = formatTime(audio.duration);
+            });
+
+            seekBar.addEventListener('change', () => {
+                audio.currentTime = seekBar.value;
+            });
+        }
+
+        setupAudioListeners(audio1, seekBar1, currentTime1, duration1);
+        setupAudioListeners(audio2, seekBar2, currentTime2, duration2);
+
+        volumeBar.addEventListener('input', () => {
+            audio1.volume = volumeBar.value;
+            audio2.volume = volumeBar.value;
+        });
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+    </script>
+</body>
+</html>
