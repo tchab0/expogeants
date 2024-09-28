@@ -21,29 +21,13 @@
 </head>
 <body>
     
-    <div style="position: relative; display: inline-block;">
-        <img src="teteClown.png" alt="Image cliquable" class="clickable-image" id="audioTrigger">
-        <span class="play-icon">▶</span>
-    </div>
+     <img src="teteClown.png" >
+       
     
     <audio id="audioPlayer" style="display:none;">
         <source src="sorci.mp3" type="audio/mpeg">
         Votre navigateur ne supporte pas l'élément audio.
     </audio>
 
-    <script>
-        const audioTrigger = document.getElementById('audioTrigger');
-        const audioPlayer = document.getElementById('audioPlayer');
-        const playIcon = document.querySelector('.play-icon');
-
-        audioTrigger.addEventListener('click', function() {
-            if (audioPlayer.paused) {
-                audioPlayer.play();
-                playIcon.textContent = '⏸';
-            } else {
-                audioPlayer.pause();
-                playIcon.textContent = '▶';
-            }
-        });
 </body>
 </html>
