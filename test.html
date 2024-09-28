@@ -67,14 +67,14 @@
                 Votre navigateur ne supporte pas l'élément audio.
             </audio>
             <div>
-                <button class="play-button" onclick="playPause()">Français</button>
+                <button class="play-button1" onclick="playPause(1)">Français</button>
             </div>
             <div>
-                <input type="range" id="seek-bar" value="0">
+                <input type="range" id="seek-bar1" value="0">
             </div>
             <div>
-                <span id="current-time">0:00</span> / 
-                <span id="duration">0:00</span>
+                <span id="current-time1">0:00</span> / 
+                <span id="duration1">0:00</span>
             </div>
    <!--         <div>
                 <label for="volume-bar">Volume:</label>
@@ -87,14 +87,14 @@
                 Votre navigateur ne supporte pas l'élément audio.
             </audio>
             <div>
-                <button class="play-button" onclick="playPause()">English</button>
+                <button class="play-button2" onclick="playPause(2)">English</button>
             </div>
             <div>
-                <input type="range" id="seek-bar" value="0">
+                <input type="range" id="seek-bar2" value="0">
             </div>
             <div>
-                <span id="current-time">0:00</span> / 
-                <span id="duration">0:00</span>
+                <span id="current-time2">0:00</span> / 
+                <span id="duration2">0:00</span>
             </div>
             <div>
                 <label for="volume-bar">Volume:</label>
@@ -110,39 +110,52 @@
 
     <script>
         // Le script JavaScript reste inchangé
-        const audio = document.getElementById('audio');
-        const seekBar = document.getElementById('seek-bar');
+        const audio1 = document.getElementById('audio1');
+        const audio2 = document.getElementById('audio2');
+        const seekBar1 = document.getElementById('seek-bar1');
+        const seekBar2 = document.getElementById('seek-bar2');
         const volumeBar = document.getElementById('volume-bar');
-        const currentTime = document.getElementById('current-time');
-        const duration = document.getElementById('duration');
+        const currentTime1 = document.getElementById('current-time1');
+        const currentTime2 = document.getElementById('current-time2');
+        const duration1 = document.getElementById('duration1');
+        const duration2 = document.getElementById('duration2');
+
 
         function playPause() {
+            const audio = playerNum === 1 ? audio1 : audio2;
+            const button = document.getElementById(`play-button${playerNum}`);
+            
             if (audio.paused) {
                 audio.play();
-                document.querySelector('.play-button').textContent = 'Pause';
+                button.textContent = 'Pause';
             } else {
                 audio.pause();
-                document.querySelector('.play-button').textContent = 'Lecture';
-            }
+                button.textContent = playerNum === 1 ? 'Français' : 'English';
         }
+        function setupAudioListeners(audio, seekBar, currentTime, duration) {
+            audio.addEventListener('timeupdate', () => {
+                seekBar.value = audio.currentTime;
+                currentTime.textContent = formatTime(audio.currentTime);
+            });
 
-        audio.addEventListener('timeupdate', () => {
-            seekBar.value = audio.currentTime;
-            currentTime.textContent = formatTime(audio.currentTime);
-        });
+            audio.addEventListener('loadedmetadata', () => {
+                seekBar.max = audio.duration;
+                duration.textContent = formatTime(audio.duration);
+            });
 
-        audio.addEventListener('loadedmetadata', () => {
-            seekBar.max = audio.duration;
-            duration.textContent = formatTime(audio.duration);
-        });
+            seekBar.addEventListener('change', () => {
+                audio.currentTime = seekBar.value;
+            });
+       }
 
-        seekBar.addEventListener('change', () => {
-            audio.currentTime = seekBar.value;
-        });
+        setupAudioListeners(audio1, seekBar1, currentTime1, duration1);
+        setupAudioListeners(audio2, seekBar2, currentTime2, duration2);
 
         volumeBar.addEventListener('input', () => {
-            audio.volume = volumeBar.value;
+            audio1.volume = volumeBar.value;
+            audio2.volume = volumeBar.value;
         });
+
 
         function formatTime(seconds) {
             const minutes = Math.floor(seconds / 60);
