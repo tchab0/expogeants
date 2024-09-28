@@ -1,25 +1,104 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-     <title>Témoignage du géant clown</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma Page avec Lecteur MP3</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+        }
+        #audio-player {
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        #audio-player button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 5px;
+        }
+        #audio-player input[type="range"] {
+            width: 100%;
+            height: 30px;
+        }
     </style>
 </head>
 <body>
-    
-     <img src="teteClown.png" align="center">
-       
-    <div id="audio-player">
-  <audio id="audio" preload="auto">
-    <source src="sorci.mp3" type="audio/mpeg">
-    Votre navigateur ne supporte pas l'élément audio.
-  </audio>
-  <div id="controls">
-    <button id="play-pause">Lecture</button>
-    <input type="range" id="seek-bar" value="0">
-    <span id="current-time">0:00</span> / <span id="duration">0:00</span>
-    <input type="range" id="volume-bar" min="0" max="1" step="0.1" value="1">
-  </div>
-</div>
-   
+    <header>
+        <h1>Ma Page Web</h1>
+         <img src="teteClown;png" alt="Description de l'image" class="centered-image">
+        <div id="audio-player">
+            <audio id="audio" style="width: 100%; margin-bottom: 10px;">
+                <source src="sorci.mp3" type="audio/mpeg">
+                Votre navigateur ne supporte pas l'élément audio.
+            </audio>
+            <div>
+                <button onclick="playPause()">Lecture/Pause</button>
+            </div>
+            <div>
+                <input type="range" id="seek-bar" value="0">
+            </div>
+            <div>
+                <span id="current-time">0:00</span> / 
+                <span id="duration">0:00</span>
+            </div>
+            <div>
+                <label for="volume-bar">Volume:</label>
+                <input type="range" id="volume-bar" min="0" max="1" step="0.1" value="1">
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Le contenu principal de votre page ici -->
+    </main>
+
+    <script>
+        const audio = document.getElementById('audio');
+        const seekBar = document.getElementById('seek-bar');
+        const volumeBar = document.getElementById('volume-bar');
+        const currentTime = document.getElementById('current-time');
+        const duration = document.getElementById('duration');
+
+        function playPause() {
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+
+        audio.addEventListener('timeupdate', () => {
+            seekBar.value = audio.currentTime;
+            currentTime.textContent = formatTime(audio.currentTime);
+        });
+
+        audio.addEventListener('loadedmetadata', () => {
+            seekBar.max = audio.duration;
+            duration.textContent = formatTime(audio.duration);
+        });
+
+        seekBar.addEventListener('change', () => {
+            audio.currentTime = seekBar.value;
+        });
+
+        volumeBar.addEventListener('input', () => {
+            audio.volume = volumeBar.value;
+        });
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+    </script>
 </body>
 </html>
