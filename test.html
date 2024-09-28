@@ -64,7 +64,27 @@
                 Votre navigateur ne supporte pas l'élément audio.
             </audio>
             <div>
-                <button class="play-button" onclick="playPause()">Lecture</button>
+                <button class="play-button" onclick="playPause()">Français</button>
+            </div>
+            <div>
+                <input type="range" id="seek-bar" value="0">
+            </div>
+            <div>
+                <span id="current-time">0:00</span> / 
+                <span id="duration">0:00</span>
+            </div>
+            <div>
+                <label for="volume-bar">Volume:</label>
+                <input type="range" id="volume-bar" min="0" max="1" step="0.1" value="1">
+            </div>
+        </div>
+                <div id="audio-player">
+            <audio id="audio" style="width: 100%; margin-bottom: 10px;">
+                <source src="sorci.mp3" type="audio/mpeg">
+                Votre navigateur ne supporte pas l'élément audio.
+            </audio>
+            <div>
+                <button class="play-button" onclick="playPause()">English</button>
             </div>
             <div>
                 <input type="range" id="seek-bar" value="0">
