@@ -10,12 +10,15 @@
             margin: 0;
             padding: 0;
             background-color: black;
+            color : white;
 
         }
         header {
-            background-color: #f0f0f0;
+            background-color: black;
             padding: 20px;
             text-align: center;
+            color : white;
+
         }
         #audio-player {
             width: 90%;
@@ -53,13 +56,13 @@
 </head>
 <body>
     <header>
-        <h1>L'Effondrement des Géants <br> La Géante Sorcière</h1>
+        <h1 >L'Effondrement des Géants <br> La Géante Sorcière</h1>
         
         <!-- Image centrée et plus petite -->
         <img src="so.png" alt="Description de l'image" class="centered-image">
 
-        <div id="audio-player">
-            <audio id="audio1" style="width: 100%; margin-bottom: 10px;">
+        <div id="audio-player1">
+            <audio id="audio" style="width: 100%; margin-bottom: 10px;">
                 <source src="SorcièreF-session.mp3" type="audio/mpeg">
                 Votre navigateur ne supporte pas l'élément audio.
             </audio>
@@ -78,8 +81,8 @@
                 <input type="range" id="volume-bar" min="0" max="1" step="0.1" value="1">
             </div>
         </div>
-                <div id="audio-player">
-            <audio id="audio2" style="width: 100%; margin-bottom: 10px;">
+                <div id="audio-player2">
+            <audio id="audio" style="width: 100%; margin-bottom: 10px;">
                 <source src="SorcièreA_Session.mp3" type="audio/mpeg">
                 Votre navigateur ne supporte pas l'élément audio.
             </audio>
