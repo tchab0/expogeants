@@ -1,1 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Effondrement des Géants - La Géante Sorcière</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            margin: 50;
+            padding: 0;
+            background-color: black;
+            color : white;
 
+        }
+        header {
+            background-color: black;
+            padding: 20px;
+            text-align: center;
+            color : white;
+
+        }
+        p {
+            text-align: justify; /* Justifie le texte */
+            padding: 20px;
+
+        }
+        h5 {
+            text-align: center;
+            background-color: #ffc107;
+        }
+        h3 {
+            text-align: center;
+            background-color: #ffc107;
+        }
+        #audio-player {
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        .play-button {
+            background-color: #ffc107;
+            font-family: 'Ubuntu', sans-serif;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .play-button:hover {
+            background-color: #fbc02d;
+        }
+        .play-button:active {
+            background-color: #f57f17;
+        }
+        #audio-player input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 5px;
+            border-radius: 1px;
+            background: #fff59d;
+            outline: none;
+        }
+        #audio-player input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%; 
+            background: #ffc107;
+            cursor: pointer;
+        }
+        #audio-player input[type="range"]::-moz-range-thumb {
+            width: 25px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ffc107;
+            cursor: pointer;
+        }
+        .centered-image {
+            max-width: 200px; /* Définit une largeur maximale plus petite */
+            width: 100%; /* S'assure que l'image est responsive */
+            height: auto; /* Conserve les proportions de l'image */
+            margin: 0 auto 20px; /* Centre l'image et ajoute un espace en dessous */
+            display: block; /* Permet le centrage avec margin auto */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2 >L'Effondrement des Géants </h2>
+        <h3>La Géante Sorcière</h3>
+        <!-- Image centrée et plus petite -->
+        <img src="GeantClown.png" alt="Description de l'image" class="centered-image">
+
+        <div id="audio-player">
+            <audio id="audio" style="width: 100%; margin-bottom: 10px;">
+                <source src="NotableF_session.mp3" type="audio/mpeg">
+                Votre navigateur ne supporte pas l'élément audio.
+            </audio>
+            <div>
+                <button class="play-button" id="play-button"  onclick="playPause()">Son témoignage</button>
+            </div>
+            <div>
+                <input type="range" id="seek-bar" value="0">
+            </div>
+            <div>
+                <span id="current-time">0:00</span> / 
+                <span id="duration">0:00</span>
+            </div>
+        </div>
+            
+    </header>
+
+    <main>
+        <!-- Le contenu principal de votre page ici -->
+        <h3>Son histoire</h3>
+        <p>Le dérèglement climatique engendre parfois des pluies torrentielles. <br>
+            Ça a été le cas dans la région de <i>Milenjara-Sekeco.</i> 
+            J'ai eu la grande chance d'arriver dans cette région totalement sinistrée pendant un épisode de pluie à peine imaginable 
+            sur Terre avant 2035 2023, qui durait depuis huit semaines ! 
+            <br>Dans la précipitation j'ai photographié l'<i>urbmejstro</i> de la 
+            première ville trouvée. Ses conseillers en communication l'avaient supplié d'aller sur les lieux à la rencontre de ses 
+            administrés pour leur montrer un peu de compassion. C'est sur le chemin du retour que je l'avais croisé (je crois qu'il 
+            m'a pris pour un <i>malgranda administrita</i>). 
+            <br>La photo présentée a été réalisée au tout début d’une montée des eaux qui a 
+            noyé la pauvre créature juste après qu’elle a eu le temps de me sauver. J’ai peut-être trop traîné à faire ma photo, 
+            ce qui m’a fait aussi perdre un flash auquel je tenais beaucoup.
+
+</p>
+    </main>
+
+    <script>
+        const audio = document.getElementById('audio');
+        const seekBar = document.getElementById('seek-bar');
+        const volumeBar = document.getElementById('volume-bar');
+        const currentTime = document.getElementById('current-time');
+        const duration = document.getElementById('duration');
+
+        function playPause() {
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+        
+        audio.addEventListener('timeupdate', () => {
+            seekBar.value = audio.currentTime;
+            currentTime.textContent = formatTime(audio.currentTime);
+        });
+
+        audio.addEventListener('loadedmetadata', () => {
+            seekBar.max = audio.duration;
+            duration.textContent = formatTime(audio.duration);
+        });
+
+        seekBar.addEventListener('change', () => {
+            audio.currentTime = seekBar.value;
+        });
+
+        volumeBar.addEventListener('input', () => {
+            audio.volume = volumeBar.value;
+        });
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+    </script>
+</body>
+</html>
