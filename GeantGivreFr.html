@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+       <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2QL4T521EC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2QL4T521EC');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+ 
+    <title>L'Effondrement des Géants - Le Géant Givré</title>
+        <link rel="icon" href="favicon.png" type="image/x-icon">
+
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            margin: 50;
+            padding: 0;
+            background-color: black;
+            color : white;
+
+        }
+        header {
+            background-color: black;
+            padding: 20px;
+            text-align: center;
+            color : white;
+
+        }
+        p {
+            text-align: justify; /* Justifie le texte */
+            padding: 20px;
+
+        }
+        #paragraphe-droite {
+  text-align: right;
+}
+        h5 {
+            text-align: center;
+            background-color: #1F618D;
+        }
+        h3 {
+            text-align: center;
+            background-color: #1F618D;
+        }
+        #audio-player {
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        .play-button {
+            background-color: #1F618D;<!--couleur bouton-->
+            font-family: 'Ubuntu', sans-serif;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .play-button:hover {
+            background-color: #1F618D;
+        }
+        .play-button:active {
+            background-color: #1F618D;
+        }
+        #audio-player input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 5px;
+            border-radius: 1px;
+            background: #aeb6bf;<!---->
+            outline: none;
+        }
+        #audio-player input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%; 
+            background: #1F618D ;
+            cursor: pointer;
+        }
+        #audio-player input[type="range"]::-moz-range-thumb {
+            width: 25px;
+            height: 8px;
+            border-radius: 50%;
+            background: #1F618D ;
+            cursor: pointer;
+        }
+        .centered-image {
+            max-width: 200px; /* Définit une largeur maximale plus petite */
+            width: 100%; /* S'assure que l'image est responsive */
+            height: auto; /* Conserve les proportions de l'image */
+            margin: 0 auto 20px; /* Centre l'image et ajoute un espace en dessous */
+            display: block; /* Permet le centrage avec margin auto */
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=G-2QL4T521EC"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <header>
+        <h2 >L'Effondrement des Géants </h2>
+        <h3>Le Géant Givré</h3>
+        <!-- Image centrée et plus petite -->
+        <img src="GeantePromeneuse.png" alt="Description de l'image" class="centered-image">
+
+        <div id="audio-player">
+            <audio id="audio" style="width: 100%; margin-bottom: 10px;">
+                <source src="GP-Français_session.mp3" type="audio/mpeg">
+                Votre navigateur ne supporte pas l'élément audio.
+            </audio>
+            <div>
+                <button class="play-button" id="play-button"  onclick="playPause()">Son Témoignage</button>
+            </div>
+            <div>
+                <input type="range" id="seek-bar" value="0">
+            </div>
+            <div>
+                <span id="current-time">0:00</span> / 
+                <span id="duration">0:00</span>
+            </div>
+        </div>
+            
+    </header>
+
+    <main>
+        <!-- Le contenu principal de votre page ici -->
+        <h3>Son Histoire</h3>
+        <p>La géante promeneuse revenait d'une belle ballade au bord de la rivière. 
+          Comme toujours depuis 33 mois maintenant elle avait enfilé l'équipement obligatoire (Norme E783) pour sortir près des milieux aquatiques. 
+          Heureusement ! Elle s'est faite attaquer par un <i>Mustanta-Muska</i>, espèce qui peut projeter jusqu'à deux litres et demi 
+          d'acides de toutes sortes (ceux qu'ils trouvent dans les rivières). Elle a quand même réussi à cueillir quelques fleurs et 
+          était fière de me les montrer ! Je ne suis pas très doué en botanique je n'ai pas pu déterminer ce que c'était. Je n'ai réussi à prendre qu'une photo,elle était pressée, 
+          elle voulait aller aux urgences. Je crois que le jet l'avait atteint sur les mains.
+
+</p>
+        <p text-align: right>
+   <b>Géante-Promeneuse :</b> Jeanne Chabot<br>
+   <b>Maquilleuse :</b>     Émilie Eouzan <br>
+           </p>
+           <p id=paragraphe-droite><a href="https://photo.chabot.xyz" align: center><em>Tchab0</em></a>
+</p>
+    </main>
+
+    <script>
+        const audio = document.getElementById('audio');
+        const seekBar = document.getElementById('seek-bar');
+        const volumeBar = document.getElementById('volume-bar');
+        const currentTime = document.getElementById('current-time');
+        const duration = document.getElementById('duration');
+
+        function playPause() {
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+        
+        audio.addEventListener('timeupdate', () => {
+            seekBar.value = audio.currentTime;
+            currentTime.textContent = formatTime(audio.currentTime);
+        });
+
+        audio.addEventListener('loadedmetadata', () => {
+            seekBar.max = audio.duration;
+            duration.textContent = formatTime(audio.duration);
+        });
+
+        seekBar.addEventListener('change', () => {
+            audio.currentTime = seekBar.value;
+        });
+
+        volumeBar.addEventListener('input', () => {
+            audio.volume = volumeBar.value;
+        });
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+    </script>
+</body>
+</html>
